@@ -80,6 +80,6 @@ describe("TranscriptStore", () => {
 
     assert.deepEqual(store.getStudentIDs("alice smith"), [studentID]);
     assert.deepEqual(store.getStudentIDs("  ALICE SMITH  "), [studentID]);
-    assert.equal(store.getTranscript(studentID).student.studentName, "  Alice Smith  ");
+    assert.equal(store.getTranscript(studentID).student.studentName, "Alice Smith");
   });
 });
