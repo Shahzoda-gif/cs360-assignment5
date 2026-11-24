@@ -63,7 +63,10 @@ describe("TranscriptStore", () => {
     store.deleteStudent(studentID);
     assert.equal(store.getGrade(studentID, "CS360"), undefined);
   });
+ fix/bug-103
+
  fix/bug-102
+ main
 
   test("BUG-102: duplicate addGrade throws instead of overwriting", () => {
     const studentID = store.addStudent("Liam");
@@ -76,5 +79,15 @@ describe("TranscriptStore", () => {
     assert.equal(store.getGrade(studentID, "CS360"), 80);
   });
 
+ fix/bug-103
+  test("BUG-103: getStudentIDs trims whitespace and ignores case while keeping display name", () => {
+    const studentID = store.addStudent("  Alice Smith  ");
+
+    assert.deepEqual(store.getStudentIDs("alice smith"), [studentID]);
+    assert.deepEqual(store.getStudentIDs("  ALICE SMITH  "), [studentID]);
+    assert.equal(store.getTranscript(studentID).student.studentName, "Alice Smith");
+  });
+
+ main
  main
 });
