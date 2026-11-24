@@ -63,6 +63,7 @@ describe("TranscriptStore", () => {
     store.deleteStudent(studentID);
     assert.equal(store.getGrade(studentID, "CS360"), undefined);
   });
+ fix/bug-102
 
   test("BUG-102: duplicate addGrade throws instead of overwriting", () => {
     const studentID = store.addStudent("Liam");
@@ -74,4 +75,6 @@ describe("TranscriptStore", () => {
     );
     assert.equal(store.getGrade(studentID, "CS360"), 80);
   });
+
+ main
 });
