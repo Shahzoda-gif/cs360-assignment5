@@ -15,11 +15,17 @@ export class TranscriptStore {
   }
 
   getStudentIDs(name) {
+ fix/bug-103
     const normalizedQuery = name === undefined ? undefined : String(name).trim().toLowerCase();
     const matches = [];
     for (const student of this.#students.values()) {
       const normalizedStudentName = student.studentName.trim().toLowerCase();
       if (normalizedQuery === undefined || normalizedStudentName === normalizedQuery) {
+
+    const matches = [];
+    for (const student of this.#students.values()) {
+      if (name === undefined || student.studentName === String(name)) {
+ main
         matches.push(student.studentID);
       }
     }
@@ -54,9 +60,18 @@ export class TranscriptStore {
     }
 
     const studentGrades = this.#grades.get(parsedID) ?? new Map();
+ fix/bug-103
     if (studentGrades.has(normalizedCourse)) {
       throw new Error(`Grade already exists for course ${normalizedCourse}`);
     }
+
+ fix/bug-102
+    if (studentGrades.has(normalizedCourse)) {
+      throw new Error(`Grade already exists for course ${normalizedCourse}`);
+    }
+
+main
+ main
     studentGrades.set(normalizedCourse, numericGrade);
     this.#grades.set(parsedID, studentGrades);
     return { studentID: parsedID, course: normalizedCourse, grade: numericGrade };
