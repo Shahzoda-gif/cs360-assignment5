@@ -63,4 +63,18 @@ describe("TranscriptStore", () => {
     store.deleteStudent(studentID);
     assert.equal(store.getGrade(studentID, "CS360"), undefined);
   });
+ fix/bug-102
+
+  test("BUG-102: duplicate addGrade throws instead of overwriting", () => {
+    const studentID = store.addStudent("Liam");
+    store.addGrade(studentID, "CS360", 80);
+
+    assert.throws(
+      () => store.addGrade(studentID, "CS360", 95),
+      /Grade already exists for course CS360/,
+    );
+    assert.equal(store.getGrade(studentID, "CS360"), 80);
+  });
+
+ main
 });
